@@ -98,7 +98,7 @@ case "$1" in
 			su oracle -c 'echo EXEC DBMS_XDB.sethttpport\(0\)\; | $ORACLE_HOME/bin/sqlplus -S / as sysdba'
 		fi
 
-		if [ $IMPORT_FROM_VOLUME ]; then
+		if [ "$IMPORT_FROM_VOLUME" == true ]; then
 			echo "Starting import from '/docker-entrypoint-initdb.d':"
 
 			for f in $(ls /docker-entrypoint-initdb.d/*); do
