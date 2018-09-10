@@ -1,4 +1,4 @@
-FROM sath89/oracle-12c-base
+FROM aledv/docker-oracle-12c-utplsql
 
 ### This image is a build from non automated image cause of no possibility of Oracle 12c instalation in Docker container
 
