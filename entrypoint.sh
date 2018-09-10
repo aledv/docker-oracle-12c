@@ -121,6 +121,7 @@ case "$1" in
 		fi
 		
 		if [ "$INSTALL_UTPLSQL" == true ]; then
+		   echo "[utPLSQL] Starting Installation"
 		   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
 		   unzip -q utPLSQL.zip
 		   cd utPLSQL/source/
