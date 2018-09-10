@@ -16,6 +16,10 @@ Run with 8080 and 1521 ports opened:
 
     docker run -d -p 8080:8080 -p 1521:1521 sath89/oracle-12c
 
+Run and Install utPLSQL framework [http://utplsql.org/]
+
+    docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true -v sath89/oracle-12c
+
 Run with data on host and reuse it:
 
     docker run -d -p 8080:8080 -p 1521:1521 -v /my/oracle/data:/u01/app/oracle sath89/oracle-12c
