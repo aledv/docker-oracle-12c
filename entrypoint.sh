@@ -126,9 +126,9 @@ case "$1" in
 		   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
 		   echo "[utPLSQL] Uncompress file..."
 		   unzip -q utPLSQL.zip
-		   echo "[utPLSQL] Starting Installation"
+		   echo "[utPLSQL] Starting Installation..."
 		   cd utPLSQL/source/
-		   su oracle -c "$ORACLE_HOME/bin/sqlplus -s / as sysdba @install_headless.sql"
+		   su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql"
 		else
 		   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
 	           echo
