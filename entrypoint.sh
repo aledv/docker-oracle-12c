@@ -119,6 +119,16 @@ case "$1" in
 			echo "[IMPORT] If you want to enable import at any state - add 'IMPORT_FROM_VOLUME=true' variable"
 			echo
 		fi
+		
+		if [ $INSTALL_UTPLSQL ]; then
+		   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
+		   unzip -q utPLSQL.zip
+		   cd utPLSQL/source/
+		   $ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql
+		else
+		   echo "[IMPORT] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
+	           echo
+		fi
 
 		echo "Database ready to use. Enjoy! ;)"
 
