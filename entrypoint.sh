@@ -121,11 +121,14 @@ case "$1" in
 		fi
 		
 		if [ "$INSTALL_UTPLSQL" == true ]; then
-		   echo "[utPLSQL] Starting Installation"
+		   cd /tmp	
+		   echo "[utPLSQL] Download..."
 		   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
+		   echo "[utPLSQL] Uncompress file..."
 		   unzip -q utPLSQL.zip
+		   echo "[utPLSQL] Starting Installation"
 		   cd utPLSQL/source/
-		   $ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql
+		   $ORACLE_HOME/bin/sqlplus / as sysdba @install_headless.sql
 		else
 		   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
 	           echo
