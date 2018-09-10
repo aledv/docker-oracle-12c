@@ -129,6 +129,13 @@ case "$1" in
 		   echo "[utPLSQL] Starting Installation..."
 		   cd utPLSQL/source/
 		   su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql"
+		   
+		   if [ "$CREATE_UT_USER" == true ]; then
+		     su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @create_utplsql_owner.sql ut_user ut_user users"
+		   else
+		     echo "[CREATE_UT_USER] If you want create UT_USER - add 'CREATE_UT_USER=true' variable"
+	             echo
+		   fi
 		else
 		   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
 	           echo
