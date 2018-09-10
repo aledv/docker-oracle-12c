@@ -16,6 +16,10 @@ Run and Install utPLSQL framework [http://utplsql.org/]
 
     docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true -v aledv/docker-oracle-12c-utplsql
 
+Run and Install utPLSQL framework [http://utplsql.org/] and Create User UT_USER
+
+    docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true -e CREATE_UT_USER=true -v aledv/docker-oracle-12c-utplsql
+
 Run with data on host and reuse it:
 
     docker run -d -p 8080:8080 -p 1521:1521 -v /my/oracle/data:/u01/app/oracle aledv/docker-oracle-12c-utplsql
@@ -38,6 +42,10 @@ To connect using sqlplus:
 sqlplus system/oracle@//localhost:1521/xe
 </pre>
 
+Password for UT_USER (if exists):
+    
+    ut_user
+    
 Password for SYS & SYSTEM:
 
     oracle
