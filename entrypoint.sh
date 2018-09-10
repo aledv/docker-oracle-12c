@@ -126,7 +126,7 @@ case "$1" in
 		   cd utPLSQL/source/
 		   $ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql
 		else
-		   echo "[IMPORT] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
+		   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
 	           echo
 		fi
 
