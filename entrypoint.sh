@@ -90,7 +90,7 @@ case "$1" in
 			echo "Database initialized. Please visit http://#containeer:8080/em http://#containeer:8080/apex for extra configuration if needed"
 		fi
 
-		if [ $WEB_CONSOLE == "true" ]; then
+		if [ "$WEB_CONSOLE" == "true" ]; then
 			echo 'Starting web management console'
 			su oracle -c 'echo EXEC DBMS_XDB.sethttpport\(8080\)\; | $ORACLE_HOME/bin/sqlplus -S / as sysdba'
 		else
