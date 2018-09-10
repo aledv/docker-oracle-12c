@@ -134,14 +134,6 @@ case "$1" in
 	           echo
 		fi
 		
-		if [ "$CREATE_UT_USER" == true ]; then
-		  echo "[CREATE_UT_USER] UT_USER creation..."
-		  su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @/tmp/create_ut_user.sql"
-		else
-		  echo "[CREATE_UT_USER] If you want to create CREATE_UT_USER - add 'CREATE_UT_USER=true' variable"
-	          echo
-		fi
-
 		echo "Database ready to use. Enjoy! ;)"
 
 		##
