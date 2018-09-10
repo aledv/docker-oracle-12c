@@ -128,7 +128,7 @@ case "$1" in
 		   unzip -q utPLSQL.zip
 		   echo "[utPLSQL] Starting Installation"
 		   cd utPLSQL/source/
-		   $ORACLE_HOME/bin/sqlplus / as sysdba @install_headless.sql
+		   su oracle -c "$ORACLE_HOME/bin/sqlplus -s / as sysdba @install_headless.sql"
 		else
 		   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
 	           echo
