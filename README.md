@@ -42,7 +42,7 @@ To connect using sqlplus:
 sqlplus system/oracle@//localhost:1521/xe
 </pre>
 
-Password for UT_USER (if exists):
+Password for UT_USER (if exist):
     
     ut_user
     
