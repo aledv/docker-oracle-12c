@@ -88,6 +88,27 @@ case "$1" in
 			su oracle -c 'echo -e "${ORACLE_HOME}\n\n" | $ORACLE_HOME/bin/sqlplus -S / as sysdba @apex_epg_config_core.sql > /dev/null'
 			su oracle -c 'echo -e "ALTER USER ANONYMOUS ACCOUNT UNLOCK;" | $ORACLE_HOME/bin/sqlplus -S / as sysdba > /dev/null'
 			echo "Database initialized. Please visit http://#containeer:8080/em http://#containeer:8080/apex for extra configuration if needed"
+		
+			if [ "$INSTALL_UTPLSQL" == true ]; then
+			   cd /tmp	
+			   echo "[utPLSQL] Download..."
+			   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
+			   echo "[utPLSQL] Uncompress file..."
+			   unzip -q utPLSQL.zip
+			   echo "[utPLSQL] Starting Installation..."
+			   cd utPLSQL/source/
+			   su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql"
+
+			   if [ "$CREATE_UT_USER" == true ]; then
+			     su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @create_utplsql_owner.sql ut_user ut_user users"
+			   else
+			     echo "[CREATE_UT_USER] If you want create UT_USER - add 'CREATE_UT_USER=true' variable"
+			     echo
+			   fi
+			else
+			   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
+			   echo
+			fi		
 		fi
 
 		if [ "$WEB_CONSOLE" == "true" ]; then
@@ -118,27 +139,6 @@ case "$1" in
 			echo "[IMPORT] Not a first start, SKIPPING Import from Volume '/docker-entrypoint-initdb.d'"
 			echo "[IMPORT] If you want to enable import at any state - add 'IMPORT_FROM_VOLUME=true' variable"
 			echo
-		fi
-		
-		if [ "$INSTALL_UTPLSQL" == true ]; then
-		   cd /tmp	
-		   echo "[utPLSQL] Download..."
-		   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
-		   echo "[utPLSQL] Uncompress file..."
-		   unzip -q utPLSQL.zip
-		   echo "[utPLSQL] Starting Installation..."
-		   cd utPLSQL/source/
-		   su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql"
-		   
-		   if [ "$CREATE_UT_USER" == true ]; then
-		     su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @create_utplsql_owner.sql ut_user ut_user users"
-		   else
-		     echo "[CREATE_UT_USER] If you want create UT_USER - add 'CREATE_UT_USER=true' variable"
-	             echo
-		   fi
-		else
-		   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
-	           echo
 		fi
 		
 		echo "Database ready to use. Enjoy! ;)"
