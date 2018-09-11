@@ -107,7 +107,6 @@ case "$1" in
 			   fi
 			else
 			   echo "[utPLSQL] If you want to install utPLSQL framework - add 'INSTALL_UTPLSQL=true' variable"
-			   echo "[CREATE_UT_USER] If you want create UT_USER - add 'CREATE_UT_USER=true' variable"
 			   echo
 			fi		
 		fi
