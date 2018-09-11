@@ -56,7 +56,7 @@ case "$1" in
 	'')
 		#Check for mounted database files
 		if [ "$(ls -A /u01/app/oracle/oradata 2>/dev/null)" ]; then
-			echo "found files in /u01/app/oracle/oradata Using them instead of initial database"
+			echo "Found files in /u01/app/oracle/oradata Using them instead of initial database"
 			echo "XE:$ORACLE_HOME:N" >> /etc/oratab
 			chown oracle:dba /etc/oratab
 			chmod 664 /etc/oratab
