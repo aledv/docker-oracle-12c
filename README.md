@@ -14,11 +14,11 @@ Run with 8080 and 1521 ports opened:
 
 Run and Install utPLSQL framework [http://utplsql.org/]
 
-    docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true -v aledv/docker-oracle-12c-utplsql
+    docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true aledv/docker-oracle-12c-utplsql
 
 Run and Install utPLSQL framework [http://utplsql.org/] and Create User UT_USER
 
-    docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true -e CREATE_UT_USER=true -v aledv/docker-oracle-12c-utplsql
+    docker run -d -p 8080:8080 -p 1521:1521 -e INSTALL_UTPLSQL=true -e CREATE_UT_USER=true aledv/docker-oracle-12c-utplsql
 
 Run with data on host and reuse it:
 
