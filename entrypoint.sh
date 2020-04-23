@@ -95,6 +95,8 @@ case "$1" in
 			   curl -LOk $(curl --silent https://api.github.com/repos/utPLSQL/utPLSQL/releases/latest | awk '/browser_download_url/ { print $2 }' | grep ".zip" | sed 's/"//g') 
 			   echo "[utPLSQL] Uncompress file..."
 			   unzip -q utPLSQL.zip
+			   echo "[utPLSQL] Set permission..."
+			   chown oracle:dba utPLSQL -R
 			   echo "[utPLSQL] Starting Installation..."
 			   cd utPLSQL/source/
 			   su oracle -c "$ORACLE_HOME/bin/sqlplus -S / as sysdba @install_headless.sql"
